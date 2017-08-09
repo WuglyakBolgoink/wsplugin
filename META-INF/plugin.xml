@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.ws.unique.plugin.id</id>
   <name>wsplugin</name>
-  <version>0.13</version>
+  <version>0.15</version>
   <vendor url="https://github.com/salahov/wsplugin/"/>
 
   <description><![CDATA[
@@ -17,6 +17,9 @@
   ]]></description>
 
   <change-notes><![CDATA[
+   0.15<br/>
+  - tmpl-файлы добавлены в индекс<br/>
+  <br/>
   0.14<br/>
   - доработан поиск обьявления компонента (define) в js-файлах<br/>
   <br/>

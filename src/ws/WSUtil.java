@@ -33,7 +33,7 @@ public class WSUtil {
         if (matcher.find()) {
             result[0] = matcher.group(2).trim(); // имя контрола
             result[1] = matcher.group(3) != null ? matcher.group(3).trim() : ""; // путь до файла + имя функции
-            result[3] = matcher.group(1) != null ? matcher.group(1).replace("!", "") : ""; // префикс (js, html, css)
+            result[3] = matcher.group(1) != null ? matcher.group(1).replace("!", "") : ""; // префикс (js, html, css, tmpl)
 
             String[] str = result[1].split(":");
             result[1] = str[0]; // путь до файла
@@ -105,6 +105,9 @@ public class WSUtil {
             if (folder.findFileByRelativePath(fileName + "xhtml") != null) {
                 result.add("html!" + controlName);
             }
+            if (folder.findFileByRelativePath(fileName + "tmpl") != null) {
+                result.add("tmpl!" + controlName);
+            }
         }
         return result;
     }
@@ -120,7 +123,7 @@ public class WSUtil {
             pref = "js";
         }
 
-        if (!pref.matches("^(css|js|html)$") || controlName == null || controlName.isEmpty()) {
+        if (!pref.matches("^(css|js|html|tmpl)$") || controlName == null || controlName.isEmpty()) {
             return resultFilesCollection;
         }
 

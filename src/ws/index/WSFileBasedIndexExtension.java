@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class WSFileBasedIndexExtension extends FileBasedIndexExtension<String, Void> {
 
-    private static final int INDEX_VERSION = 132; // !!!ВАЖНО!!! при изменении логики построения индекса необходимо увеличить версию индекса
+    private static final int INDEX_VERSION = 133; // !!!ВАЖНО!!! при изменении логики построения индекса необходимо увеличить версию индекса
 
     public static final ID<String, Void> WS_PATH_INDEX = ID.create("wsPathIndex");
     private DataIndexer<String, Void, FileContent> myDataIndexer = new MyDataIndexer();
