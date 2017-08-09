@@ -1,54 +1,56 @@
 <idea-plugin version="2">
-  <id>com.ws.unique.plugin.id</id>
-  <name>wsplugin</name>
-  <version>0.15</version>
-  <vendor url="https://github.com/salahov/wsplugin/"/>
+    <id>com.ws.unique.plugin.id</id>
+    <name>wsplugin</name>
+    <version>0.16</version>
+    <vendor url="https://github.com/salahov/wsplugin/"/>
 
-  <description><![CDATA[
-  <b>wsplugin</b> <br/>
+    <description><![CDATA[
+        <b>wsplugin</b> <br/>
 
-  Плагин для работы с ws <br/><br/>
+        Плагин для работы с ws <br/><br/>
 
-  Что реализованино:<br/>
+        Что реализованино:<br/>
 
-  - переход и автодополнение в xhtml файлах (в тегах component и option) <br/>
-  - переход и автодополнение в зависимостях requirejs модулей <br/>
-  - диалог создания компонента<br/>
-  ]]></description>
+        - переход и автодополнение в xhtml файлах (в тегах component и option) <br/>
+        - переход и автодополнение в зависимостях requirejs модулей <br/>
+        - диалог создания компонента<br/>
+    ]]></description>
 
-  <change-notes><![CDATA[
-   0.15<br/>
-  - tmpl-файлы добавлены в индекс<br/>
-  <br/>
-  0.14<br/>
-  - доработан поиск обьявления компонента (define) в js-файлах<br/>
-  <br/>
-  0.13<br/>
-  - добавлен диалог создания компонента<br/>
-  <br/>
-  0.12<br/>
-  - добавлен переход из тела тега option (без автодополнения)<br/>
-  - исправлена проблема с подчеркиванием последних символов<br/>
-  ]]></change-notes>
+    <change-notes><![CDATA[
+        0.16<br/>
+        - доработан поиск обьявления компонента (define) в js-файлах<br/>
+        0.15<br/>
+        - tmpl-файлы добавлены в индекс<br/>
+        <br/>
+        0.14<br/>
+        - доработан поиск обьявления компонента (define) в js-файлах<br/>
+        <br/>
+        0.13<br/>
+        - добавлен диалог создания компонента<br/>
+        <br/>
+        0.12<br/>
+        - добавлен переход из тела тега option (без автодополнения)<br/>
+        - исправлена проблема с подчеркиванием последних символов<br/>
+    ]]></change-notes>
 
-  <idea-version since-build="131"/>
+    <idea-version since-build="131"/>
 
-  <depends>JavaScript</depends>
-  <depends>com.intellij.modules.platform</depends>
-  <depends>com.intellij.modules.xml</depends>
+    <depends>JavaScript</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.xml</depends>
 
-  <actions>
-    <action id="ws.AddComponent" class="ws.actions.WSAddComponent" text="Component" icon="WSIcons.ws">
-      <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
-    </action>
-    <action id="ws.GenerateComponent" class="ws.actions.WSGenerateComponent" text="Component" icon="WSIcons.ws">
-      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-    </action>
-  </actions>
+    <actions>
+        <action id="ws.AddComponent" class="ws.actions.WSAddComponent" text="Component" icon="WSIcons.ws">
+            <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
+        </action>
+        <action id="ws.GenerateComponent" class="ws.actions.WSGenerateComponent" text="Component" icon="WSIcons.ws">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <psi.referenceContributor implementation="ws.WSPsiReferenceContributor" />
-    <fileBasedIndex implementation="ws.index.WSFileBasedIndexExtension" />
-    <!--<projectConfigurable implementation="ws.settings.WSSettingsPage"/>-->
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <psi.referenceContributor implementation="ws.WSPsiReferenceContributor"/>
+        <fileBasedIndex implementation="ws.index.WSFileBasedIndexExtension"/>
+        <!--<projectConfigurable implementation="ws.settings.WSSettingsPage"/>-->
+    </extensions>
 </idea-plugin>

@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
 
 public class WSUtil {
 
-    public static String REGEX_PATTERN = "(\\w+!)?([\\w.]+)(.*)?";
-    public static String INDEX_REGEX_PATTERN = "^['\"]js!([\\w.]+)";
-    public static String CONTROL_REGEX_PATTERN = "^([\\w.]+)$";
+    private static String REGEX_PATTERN = "(?:optional!)?(?:remote!.+\\?)?(\\w+!)?([\\w.]+)(.*)?";
+    public static String INDEX_REGEX_PATTERN = "^['\"](?:js!)?([\\w./]+)";
+    private static String CONTROL_REGEX_PATTERN = "^([\\w.]+)$";
 
     public static boolean matchPattern(String str) {
         return str.matches(CONTROL_REGEX_PATTERN);
@@ -45,7 +45,7 @@ public class WSUtil {
         return result;
     }
 
-    public static Collection<String> getAllChildFiles(VirtualFile file, String key, String type) {
+    private static Collection<String> getAllChildFiles(VirtualFile file, String key, String type) {
         Collection<String> result = new HashSet<String>();
         String fileName = file.getName();
         String filePath = file.getPath();
@@ -64,7 +64,7 @@ public class WSUtil {
         return result;
     }
 
-    public static Collection<String> getChildFiles(VirtualFile file, String key) {
+    private static Collection<String> getChildFiles(VirtualFile file, String key) {
         return getAllChildFiles(file, key, "js");
     }
 
@@ -132,6 +132,11 @@ public class WSUtil {
         }
 
         Collection<VirtualFile> files = WSFileBasedIndexExtension.getFileByComponentName(project, controlName);
+
+        if(files.size() == 0 ){
+            files = WSFileBasedIndexExtension.getFileByComponentName(project, controlName + path);
+            path = "";
+        }
 
         if (files.size() == 0) {
             return resultFilesCollection;

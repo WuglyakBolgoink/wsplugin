@@ -17,6 +17,7 @@ import com.intellij.util.indexing.*;
 import com.intellij.util.io.DataExternalizer;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
+import com.intellij.util.io.VoidDataExternalizer;
 import org.jetbrains.annotations.NotNull;
 import ws.WSUtil;
 
@@ -28,9 +29,9 @@ import java.util.regex.Pattern;
 
 public class WSFileBasedIndexExtension extends FileBasedIndexExtension<String, Void> {
 
-    private static final int INDEX_VERSION = 133; // !!!ВАЖНО!!! при изменении логики построения индекса необходимо увеличить версию индекса
+    private static final int INDEX_VERSION = 137; // !!!ВАЖНО!!! при изменении логики построения индекса необходимо увеличить версию индекса
 
-    public static final ID<String, Void> WS_PATH_INDEX = ID.create("wsPathIndex");
+    private static final ID<String, Void> WS_PATH_INDEX = ID.create("wsPathIndex");
     private DataIndexer<String, Void, FileContent> myDataIndexer = new MyDataIndexer();
 
     public static Collection<VirtualFile> getFileByComponentName(@NotNull final Project project, @NotNull final String name) {
@@ -94,15 +95,10 @@ public class WSFileBasedIndexExtension extends FileBasedIndexExtension<String, V
     public class WSInputFilter extends DefaultFileTypeSpecificInputFilter {
         @Override
         public boolean acceptInput(@NotNull VirtualFile file) {
-            boolean accepts = super.acceptInput(file);
-            accepts = accepts && file.getFileType() == StdFileTypes.JS;
-            /*if (accepts && file.getFileType() == StdFileTypes.JS) {
-                accepts = (file.getName().endsWith(".module.js") || file.getName().endsWith("-plugin.js"));
-            }*/
-            return accepts;
+            return super.acceptInput(file) && file.getFileType() == StdFileTypes.JS;
         }
 
-        public WSInputFilter() {
+        WSInputFilter() {
             super(StdFileTypes.JS);
         }
     }
@@ -133,7 +129,7 @@ public class WSFileBasedIndexExtension extends FileBasedIndexExtension<String, V
     @NotNull
     @Override
     public DataExternalizer<Void> getValueExternalizer() {
-        return ScalarIndexExtension.VOID_DATA_EXTERNALIZER;
+        return VoidDataExternalizer.INSTANCE;
     }
 
     @NotNull
