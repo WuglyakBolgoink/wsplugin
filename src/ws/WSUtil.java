@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class WSUtil {
 
     private static String REGEX_PATTERN = "(?:optional!)?(?:remote!.+\\?)?(\\w+!)?([\\w.]+)(.*)?";
-    public static String INDEX_REGEX_PATTERN = "^['\"](?:js!)?([\\w./]+)";
+    public static String INDEX_REGEX_PATTERN = "^['\"](?:js!)?([\\w./-]+)";
     private static String CONTROL_REGEX_PATTERN = "^([\\w.]+)$";
 
     public static boolean matchPattern(String str) {
